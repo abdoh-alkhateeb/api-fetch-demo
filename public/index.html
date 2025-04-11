@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Streaming Platform</title>
+  </head>
+  <body>
+    <audio id="audio-player" controls></audio>
+
+    <script>
+      window.onload = async () => {
+        try {
+          const response = await fetch(
+            'http://localhost:3000/proxy/download/count_monte_cristo_0711_librivox/count_of_monte_cristo_001_dumas_64kb.mp3'
+          );
+
+          const audioBlob = await response.blob();
+          const audioUrl = URL.createObjectURL(audioBlob);
+
+          const audioPlayer = document.getElementById('audio-player');
+
+          audioPlayer.src = audioUrl;
+        } catch (error) {
+          console.error('Error loading the audio file:', error);
+        }
+      };
+    </script>
+  </body>
+</html>
